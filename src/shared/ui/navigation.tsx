@@ -1,5 +1,7 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import { useCategories } from "entities/category";
+// TODO: can ui import from an entity?
 
 export const Navigation = () => {
   return (
@@ -46,13 +48,21 @@ const burgerIcon = (
   </svg>
 );
 
-const Menu = () => (
-  <>
-    <li>
-      <Link href="/">Dashboard</Link>
-    </li>
-    <li>
-      <Link href="/category/1">1</Link>
-    </li>
-  </>
-);
+const Menu = () => {
+  const { categories } = useCategories();
+
+  return (
+    <>
+      <li>
+        <Link href="/">Dashboard</Link>
+      </li>
+      {categories?.map(({ id, title }) => {
+        return (
+          <li key={id}>
+            <Link href={`/category/${id}`}>{title}</Link>
+          </li>
+        );
+      })}
+    </>
+  );
+};
