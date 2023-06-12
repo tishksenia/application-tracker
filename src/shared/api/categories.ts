@@ -9,7 +9,7 @@ interface Category {
 
 const categoriesApi = {
   getCategories: (): Promise<AxiosResponse<Category[]>> =>
-    axiosClient.get("api/categories"),
+    axiosClient.get("/api/categories"),
 };
 
 export { categoriesApi };
